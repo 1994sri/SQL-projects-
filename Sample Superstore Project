@@ -1,0 +1,70 @@
+
+
+select * from [Sample - Superstore] 
+
+-- how many different category of products  
+  select distinct(category) from [Sample - Superstore] 
+
+-- how many total porduct were sold in each category    
+    select distinct(count(quantity)),category from [Sample - Superstore] group by category 
+
+-- what is the total sale in each year  
+  SELECT category,year(order_date) as order_year, SUM(sales) AS total_sales
+FROM [Sample - Superstore]
+GROUP BY category,Order_Date having category = 'Furniture'
+
+-- what is the product with highest discount  offered on products
+    select max(discount)as maxdisc ,category as maxdiscountoffered from [Sample - Superstore] group by category 
+    
+--  what is the product which generated highest profit   
+    
+	select max(profit) as maxprofit, category  from [Sample - Superstore]  group by category
+
+
+-- which city has the highest profit 
+  
+    select top 5 (max(profit)) as maxprofits,City from [Sample - Superstore] group by city order by  city asc
+-- which region had the highest and lowest sales 
+
+
+    select max(sales ) as maxsales ,region from [Sample - Superstore] group by region order by region asc
+	 select min(sales ) as minsales ,region from [Sample - Superstore] group by region order by region asc
+use topagencyinword
+
+select * from [Sample - Superstore]
+
+-- which customer purchased most number of products 
+
+    Select top 5  max(category), max(Sub_Category)  ,(customer_name) as maxproductpurchased from [Sample - Superstore] group by Customer_Name, Sub_Category 
+    
+-- how many unique shipment modes and list of products delivered through unique shipment 
+    select count (distinct(ship_mode)), Ship_Mode from [Sample - Superstore] group by Ship_Mode
+	select count(distinct(ship_mode)), Ship_Mode , category from [Sample - Superstore] group by Category , Ship_Mode
+
+-- how many unique customer segments 
+
+    select distinct(segment) from [Sample - Superstore]
+
+-- which year had the highest sales 
+    select distinct( year(max(order_date))) as years ,sales from [Sample - Superstore] group by Sales order by Sales asc
+
+-- which  product had the highest sold product each
+select count(Quantity) as totalQ, Category, year(order_date) as distcat
+from [Sample - Superstore]
+group by  Category, year(order_date); 
+
+-- which year had the lowest sales 
+
+    select year(Order_Date) , min(sales) as minsaleyr from [Sample - Superstore] group by year(Order_Date)
+
+-- which product were sold the least in each year 
+        select year(Order_Date) , min(Category) as minsaleyr from [Sample - Superstore] group by year(Order_Date) order by year (order_date) asc
+
+-- which product were sold without any discount 
+    select category ,Sub_Category , discount from [Sample - Superstore] where Discount = 0
+
+-- which year had the lowest sales
+   select min(sales), year(order_date) as lowsalesyear from [Sample - Superstore] group  by year(Order_Date)
+
+   
+
