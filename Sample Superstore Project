@@ -66,5 +66,26 @@ group by  Category, year(order_date);
 -- which year had the lowest sales
    select min(sales), year(order_date) as lowsalesyear from [Sample - Superstore] group  by year(Order_Date)
 
-   
+   How to retrieve  records of a particular category and sub category 
+
+CREATE PROCEDURE Displayrecords (@category nvarchar(50), @subacat nvarchar(50))
+AS
+BEGIN
+  SELECT * FROM [Sample - Superstore] -- Assuming no brackets needed
+  WHERE Category = @category AND Sub_Category = @subacat;
+END;
+GO 
+
+EXEC Displayrecords @category = 'Furniture', @subacat = 'bookcases'; 
+
+
+Create a table to view only the details of Category and sub category of products from the dataset 
+
+create view salesoffurniture as 
+select category ,sub_category from [Sample - Superstore]
+where State = 'California'
+
+select * from SalesofFurniture
+
+
 
