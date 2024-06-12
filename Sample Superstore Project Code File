@@ -76,6 +76,14 @@ BEGIN
 END;
 GO 
 
+Categorise product on category and subcategory and group them 
+SELECT
+    Category,
+    sub_category,
+    Dense_RANK() OVER (ORDER BY category DESC) AS dense_Rank
+FROM
+    [Sample - Superstore];
+
 EXEC Displayrecords @category = 'Furniture', @subacat = 'bookcases'; 
 
 
